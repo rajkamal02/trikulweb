@@ -1,0 +1,13 @@
+﻿require('dotenv').config();
+global.WebSocket = require('ws');
+const express = require('express');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const { createClient } = require('@supabase/supabase-js');
+const path = require('path');
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
+const supabaseAdmin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);

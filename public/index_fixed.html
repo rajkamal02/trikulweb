@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trikul Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #f5a623;
+  --gold-dim: rgba(245,166,35,0.15);
+  --blue: #3b82f6;
+  --green: #10b981;
+  --red: #ef4444;
+  --bg: #0d0f14;
+  --bg2: #141720;
+  --bg3: #1c2030;
+  --border: rgba(255,255,255,0.08);
+  --text: #e8eaf0;
+  --text2: #8892a4;
+  --card: #161a26;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+[data-theme="light"] {
+  --bg: #f5f6fa;
+  --bg2: #ffffff;
+  --bg3: #eef0f5;
+  --border: rgba(0,0,0,0.08);
+  --text: #1a1d2e;
+  --text2: #5a6272;
+  --card: #ffffff;
+  --shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  transition:background 0.3s,color 0.3s;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+/* ── NAVBAR ── */
+#navbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,15,20,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+[data-theme="light"] #navbar{background:rgba(255,255,255,0.92);}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:700;
+  color:var(--gold);
+  letter-spacing:-0.02em;
+  text-decoration:none;
+}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{
+  color:var(--text2);
+  text-decoration:none;
+  font-size:0.875rem;font-weight:500;
+  padding:8px 14px;border-radius:8px;
+  transition:all 0.2s;
+}
+.nav-links a:hover{color:var(--gold);background:var(--gold-dim);}
+#themeBtn{
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text);cursor:pointer;
+  width:38px;height:38px;border-radius:10px;
+  font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;margin-left:8px;
+}
+#themeBtn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── HERO ── */
+#hero{
+  padding:80px 24px 60px;
+  max-width:1100px;margin:0 auto;
+  text-align:center;
+}
+.hero-tag{
+  display:inline-block;
+  background:var(--gold-dim);
+  border:1px solid rgba(245,166,35,0.3);
+  color:var(--gold);
+  font-size:0.8rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:6px 16px;border-radius:20px;
+  margin-bottom:24px;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  font-weight:900;line-height:1.15;
+  margin-bottom:20px;
+  letter-spacing:-0.02em;
+}
+.hero-title span{color:var(--gold);}
+.hero-sub{
+  color:var(--text2);font-size:1.05rem;
+  max-width:560px;margin:0 auto 48px;
+  line-height:1.7;
+}
+.stats-row{
+  display:flex;flex-wrap:wrap;gap:16px;justify-content:center;
+}
+.stat-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;padding:20px 32px;
+  min-width:140px;
+  transition:transform 0.2s,border-color 0.2s;
+}
+.stat-card:hover{transform:translateY(-3px);border-color:var(--gold);}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:700;
+  color:var(--gold);
+}
+.stat-label{font-size:0.8rem;color:var(--text2);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}
+
+/* ── SECTIONS ── */
+.section{
+  max-width:1100px;margin:0 auto;
+  padding:60px 24px;
+}
+.section-header{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:36px;flex-wrap:wrap;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;font-weight:700;
+}
+.section-divider{flex:1;height:1px;background:var(--border);min-width:40px;}
+
+/* ── FILTER TABS ── */
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-tab{
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text2);font-size:0.82rem;font-weight:500;
+  padding:6px 14px;border-radius:20px;cursor:pointer;
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.filter-tab.active,.filter-tab:hover{
+  background:var(--gold);border-color:var(--gold);color:#000;
+}
+
+/* ── GRID ── */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+
+/* ── PDF CARD ── */
+.pdf-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;padding:20px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:all 0.25s;
+  position:relative;overflow:hidden;
+}
+.pdf-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--blue));
+  opacity:0;transition:opacity 0.2s;
+}
+.pdf-card:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3);}
+.pdf-card:hover::before{opacity:1;}
+.pdf-badge{
+  display:inline-block;
+  background:var(--gold-dim);color:var(--gold);
+  font-size:0.72rem;font-weight:600;
+  padding:3px 10px;border-radius:12px;
+  letter-spacing:0.06em;text-transform:uppercase;
+  align-self:flex-start;
+}
+.pdf-title{font-size:0.95rem;font-weight:600;line-height:1.4;}
+.pdf-meta{font-size:0.78rem;color:var(--text2);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px 18px;border-radius:10px;
+  font-size:0.85rem;font-weight:600;
+  cursor:pointer;border:none;
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+  text-decoration:none;
+}
+.btn-gold{background:var(--gold);color:#000;}
+.btn-gold:hover{background:#ffb83d;transform:scale(1.02);}
+.btn-outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-blue{background:var(--blue);color:#fff;}
+.btn-blue:hover{background:#2563eb;}
+.btn-green{background:var(--green);color:#fff;}
+.btn-red{background:var(--red);color:#fff;padding:6px 12px;font-size:0.78rem;}
+
+/* ── VIDEO CARD ── */
+.video-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  transition:all 0.25s;
+}
+.video-card:hover{transform:translateY(-4px);border-color:rgba(59,130,246,0.4);}
+.video-thumb{
+  width:100%;aspect-ratio:16/9;
+  background:var(--bg3);
+  position:relative;overflow:hidden;
+}
+.video-thumb img{width:100%;height:100%;object-fit:cover;}
+.play-overlay{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.3);
+  opacity:0;transition:opacity 0.2s;
+}
+.video-card:hover .play-overlay{opacity:1;}
+.play-btn-big{
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(59,130,246,0.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+}
+.video-info{padding:16px;}
+.video-title{font-size:0.93rem;font-weight:600;margin-bottom:10px;line-height:1.4;}
+.video-meta{font-size:0.78rem;color:var(--text2);}
+
+/* ── AFFAIRS ACCORDION ── */
+.affair-item{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;margin-bottom:12px;
+  overflow:hidden;transition:border-color 0.2s;
+}
+.affair-item.open{border-color:rgba(16,185,129,0.4);}
+.affair-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;cursor:pointer;
+  transition:background 0.2s;
+}
+.affair-header:hover{background:var(--bg3);}
+.affair-date{
+  font-size:0.75rem;color:var(--green);
+  font-weight:600;letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+.affair-title-text{font-size:0.95rem;font-weight:600;margin-top:4px;}
+.affair-arrow{
+  font-size:1.2rem;color:var(--text2);
+  transition:transform 0.3s;flex-shrink:0;
+}
+.affair-item.open .affair-arrow{transform:rotate(180deg);}
+.affair-body{
+  display:none;padding:0 20px 20px;
+  border-top:1px solid var(--border);
+}
+.affair-item.open .affair-body{display:block;}
+.affair-content{
+  color:var(--text2);font-size:0.9rem;line-height:1.7;
+  margin-top:16px;margin-bottom:20px;
+  white-space:pre-wrap;
+}
+
+/* ── MCQ ── */
+.mcq-block{margin-top:16px;}
+.mcq-q{font-size:0.9rem;font-weight:600;margin-bottom:10px;}
+.mcq-options{display:flex;flex-direction:column;gap:8px;}
+.mcq-opt{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;
+  font-size:0.85rem;cursor:pointer;
+  transition:all 0.2s;text-align:left;
+  font-family:'DM Sans',sans-serif;color:var(--text);
+}
+.mcq-opt:hover{border-color:var(--gold);background:var(--gold-dim);}
+.mcq-opt.correct{background:rgba(16,185,129,0.15);border-color:var(--green);color:var(--green);}
+.mcq-opt.wrong{background:rgba(239,68,68,0.15);border-color:var(--red);color:var(--red);}
+
+/* ── DAILY TASK ── */
+#daily-task{
+  background:linear-gradient(135deg,var(--bg2),var(--bg3));
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:40px;
+  text-align:center;
+}
+.task-label{
+  color:var(--gold);font-size:0.78rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.task-question{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;font-weight:600;
+  line-height:1.5;margin-bottom:28px;
+}
+.task-opts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;max-width:700px;margin:0 auto 20px;
+}
+.task-opt{
+  background:var(--card);border:2px solid var(--border);
+  border-radius:12px;padding:14px;
+  font-size:0.88rem;cursor:pointer;
+  transition:all 0.2s;font-family:'DM Sans',sans-serif;
+  color:var(--text);
+}
+.task-opt:hover{border-color:var(--gold);background:var(--gold-dim);}
+.task-opt.correct{border-color:var(--green);background:rgba(16,185,129,0.15);color:var(--green);}
+.task-opt.wrong{border-color:var(--red);background:rgba(239,68,68,0.15);color:var(--red);}
+#taskResult{font-size:0.9rem;color:var(--text2);margin-top:12px;}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:32px 24px;
+  color:var(--text2);font-size:0.85rem;
+  border-top:1px solid var(--border);
+  margin-top:40px;
+}
+
+/* ── SECRET DOT ── */
+#secretDot{
+  position:fixed;bottom:16px;left:16px;
+  width:14px;height:14px;border-radius:50%;
+  background:rgba(245,166,35,0.3);
+  cursor:pointer;z-index:999;
+  transition:background 0.2s,transform 0.2s;
+}
+#secretDot:hover{
+  background:rgba(245,166,35,0.7);
+  transform:scale(1.4);
+}
+
+/* ── MODAL BASE ── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:36px;
+  width:100%;max-width:420px;
+  position:relative;
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text2);cursor:pointer;
+  width:32px;height:32px;border-radius:8px;
+  font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{border-color:var(--red);color:var(--red);}
+.modal-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:700;
+  margin-bottom:24px;
+}
+.form-group{margin-bottom:16px;}
+.form-group label{
+  display:block;font-size:0.82rem;font-weight:600;
+  color:var(--text2);margin-bottom:6px;
+  letter-spacing:0.05em;text-transform:uppercase;
+}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;background:var(--bg3);
+  border:1px solid var(--border);border-radius:10px;
+  color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;
+  padding:10px 14px;transition:border-color 0.2s;
+}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  outline:none;border-color:var(--gold);
+}
+.msg{font-size:0.85rem;margin-top:10px;padding:10px 14px;border-radius:8px;}
+.msg.err{background:rgba(239,68,68,0.15);color:var(--red);}
+.msg.ok{background:rgba(16,185,129,0.15);color:var(--green);}
+
+/* ── PDF MODAL ── */
+#pdfModal .modal-box{max-width:900px;height:90vh;display:flex;flex-direction:column;}
+#pdfFrame{flex:1;border:none;border-radius:10px;background:#fff;}
+
+/* ── ADMIN PANEL ── */
+#adminOverlay{
+  position:fixed;inset:0;z-index:2000;
+  background:var(--bg);
+  display:none;flex-direction:column;
+  overflow-y:auto;
+}
+#adminOverlay.open{display:flex;}
+.admin-header{
+  position:sticky;top:0;z-index:10;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+}
+.admin-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;color:var(--gold);
+}
+.admin-email{font-size:0.82rem;color:var(--text2);}
+.admin-body{max-width:1100px;margin:0 auto;padding:32px 24px;width:100%;}
+.admin-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:32px;}
+.admin-tab{
+  padding:9px 18px;border-radius:10px;
+  font-size:0.85rem;font-weight:600;cursor:pointer;
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text2);transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.admin-tab.active{background:var(--gold);border-color:var(--gold);color:#000;}
+.admin-pane{display:none;}
+.admin-pane.active{display:block;}
+.admin-section{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:24px;margin-bottom:24px;
+}
+.admin-section h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--border);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.list-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;border-bottom:1px solid var(--border);
+  gap:12px;
+}
+.list-item:last-child{border-bottom:none;}
+.list-item-info{flex:1;min-width:0;}
+.list-item-title{font-size:0.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.list-item-meta{font-size:0.78rem;color:var(--text2);}
+.dash-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px;}
+.dash-stat{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:14px;padding:20px;text-align:center;
+}
+.dash-stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);}
+.dash-stat-label{font-size:0.78rem;color:var(--text2);margin-top:4px;}
+.analytics-table{width:100%;border-collapse:collapse;font-size:0.83rem;}
+.analytics-table th{
+  text-align:left;padding:10px 12px;
+  background:var(--bg3);color:var(--text2);
+  font-weight:600;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;
+}
+.analytics-table td{padding:10px 12px;border-bottom:1px solid var(--border);}
+.analytics-table tr:hover td{background:var(--bg3);}
+.badge-type{
+  display:inline-block;padding:2px 8px;border-radius:6px;font-size:0.72rem;font-weight:600;
+}
+.badge-pdf{background:rgba(245,166,35,0.15);color:var(--gold);}
+.badge-video{background:rgba(59,130,246,0.15);color:var(--blue);}
+.badge-affair{background:rgba(16,185,129,0.15);color:var(--green);}
+.empty-state{
+  text-align:center;padding:40px;
+  color:var(--text2);font-size:0.9rem;
+}
+
+/* ── LOADING ── */
+.loading{
+  display:flex;align-items:center;justify-content:center;
+  padding:40px;gap:10px;color:var(--text2);
+}
+.spin{
+  width:20px;height:20px;border:2px solid var(--border);
+  border-top-color:var(--gold);border-radius:50%;
+  animation:spin 0.7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .nav-links a{display:none;}
+  .nav-links a:last-child,.nav-links a:nth-last-child(2){display:inline-flex;}
+  .form-row{grid-template-columns:1fr;}
+  #daily-task{padding:24px 16px;}
+  .task-opts{grid-template-columns:1fr;}
+  .modal-box{padding:24px;}
+}
+
+/* ── CALCULATOR ── */
+.calc-fab{
+  position:fixed;right:20px;bottom:20px;z-index:9999;
+}
+.calc-btn{width:56px;height:56px;border-radius:50%;background:var(--gold);border:none;box-shadow:var(--shadow);cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center}
+.calc-modal .modal-box{max-width:520px;padding:20px;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.calc-grid .full{grid-column:1/-1}
+.calc-res{background:var(--bg3);border:1px solid var(--border);padding:12px;border-radius:10px;color:var(--text2);font-size:0.9rem}
+.calc-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+
+
+/* ENHANCED THEME v2 */
+[data-theme="dark"]{
+  --bg:#070b14;--bg2:#0d1420;--bg3:#111827;--card:#141e30;
+  --border:#1e3a5f;--text:#e2e8f0;--text2:#7c8fa6;
+  --gold:#f0a500;--gold2:#ffc63d;--teal:#0ea5e9;--blue:#6366f1;
+  --green:#22c55e;--red:#ef4444;--shadow:0 4px 32px rgba(0,0,0,0.6);
+  --nav-bg:rgba(7,11,20,0.97);
+  --hero-gradient:linear-gradient(135deg,#070b14 0%,#0d1f3c 60%,#071a07 100%);
+}
+[data-theme="light"]{
+  --bg:#f8faff;--bg2:#eef2ff;--bg3:#ffffff;--card:#ffffff;
+  --border:#c7d2fe;--text:#1e1b4b;--text2:#6b7280;
+  --gold:#b45309;--gold2:#d97706;--teal:#0891b2;--blue:#4f46e5;
+  --green:#15803d;--red:#dc2626;--shadow:0 4px 24px rgba(79,70,229,0.12);
+  --nav-bg:rgba(248,250,255,0.97);
+  --hero-gradient:linear-gradient(135deg,#eef2ff 0%,#fdf4ff 50%,#ecfdf5 100%);
+}
+body{background:var(--bg);transition:background 0.3s,color 0.3s;}
+#navbar{background:var(--nav-bg)!important;backdrop-filter:blur(12px);}
+#hero{background:var(--hero-gradient)!important;}
+.stat-card,.pdf-card,.video-card,.affair-item,.admin-section{
+  background:var(--card)!important;border:1px solid var(--border)!important;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.stat-card:hover,.pdf-card:hover,.video-card:hover{
+  transform:translateY(-4px);box-shadow:var(--shadow)!important;
+}
+#navDate{
+  font-size:0.72rem;color:var(--text2);padding:4px 12px;
+  background:var(--bg3);border-radius:20px;border:1px solid var(--border);
+  white-space:nowrap;font-weight:500;letter-spacing:0.3px;
+}
+
+/* ENHANCED THEME v2 */
+[data-theme="dark"]{
+  --bg:#070b14;--bg2:#0d1420;--bg3:#111827;--card:#141e30;
+  --border:#1e3a5f;--text:#e2e8f0;--text2:#7c8fa6;
+  --gold:#f0a500;--gold2:#ffc63d;--teal:#0ea5e9;--blue:#6366f1;
+  --green:#22c55e;--red:#ef4444;--shadow:0 4px 32px rgba(0,0,0,0.6);
+  --nav-bg:rgba(7,11,20,0.97);
+  --hero-gradient:linear-gradient(135deg,#070b14 0%,#0d1f3c 60%,#071a07 100%);
+}
+[data-theme="light"]{
+  --bg:#f8faff;--bg2:#eef2ff;--bg3:#ffffff;--card:#ffffff;
+  --border:#c7d2fe;--text:#1e1b4b;--text2:#6b7280;
+  --gold:#b45309;--gold2:#d97706;--teal:#0891b2;--blue:#4f46e5;
+  --green:#15803d;--red:#dc2626;--shadow:0 4px 24px rgba(79,70,229,0.12);
+  --nav-bg:rgba(248,250,255,0.97);
+  --hero-gradient:linear-gradient(135deg,#eef2ff 0%,#fdf4ff 50%,#ecfdf5 100%);
+}
+body{background:var(--bg);transition:background 0.3s,color 0.3s;}
+#navbar{background:var(--nav-bg)!important;backdrop-filter:blur(12px);}
+#hero{background:var(--hero-gradient)!important;}
+.stat-card,.pdf-card,.video-card,.affair-item,.admin-section{
+  background:var(--card)!important;border:1px solid var(--border)!important;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.stat-card:hover,.pdf-card:hover,.video-card:hover{
+  transform:translateY(-4px);box-shadow:var(--shadow)!important;
+}
+#navDate{
+  font-size:0.72rem;color:var(--text2);padding:4px 12px;
+  background:var(--bg3);border-radius:20px;border:1px solid var(--border);
+  white-space:nowrap;font-weight:500;letter-spacing:0.3px;
+}
+
+/* ENHANCED THEME v2 */
+[data-theme="dark"]{
+  --bg:#070b14;--bg2:#0d1420;--bg3:#111827;--card:#141e30;
+  --border:#1e3a5f;--text:#e2e8f0;--text2:#7c8fa6;
+  --gold:#f0a500;--gold2:#ffc63d;--teal:#0ea5e9;--blue:#6366f1;
+  --green:#22c55e;--red:#ef4444;--shadow:0 4px 32px rgba(0,0,0,0.6);
+  --nav-bg:rgba(7,11,20,0.97);
+  --hero-gradient:linear-gradient(135deg,#070b14 0%,#0d1f3c 60%,#071a07 100%);
+}
+[data-theme="light"]{
+  --bg:#f8faff;--bg2:#eef2ff;--bg3:#ffffff;--card:#ffffff;
+  --border:#c7d2fe;--text:#1e1b4b;--text2:#6b7280;
+  --gold:#b45309;--gold2:#d97706;--teal:#0891b2;--blue:#4f46e5;
+  --green:#15803d;--red:#dc2626;--shadow:0 4px 24px rgba(79,70,229,0.12);
+  --nav-bg:rgba(248,250,255,0.97);
+  --hero-gradient:linear-gradient(135deg,#eef2ff 0%,#fdf4ff 50%,#ecfdf5 100%);
+}
+body{background:var(--bg);transition:background 0.3s,color 0.3s;}
+#navbar{background:var(--nav-bg)!important;backdrop-filter:blur(12px);}
+#hero{background:var(--hero-gradient)!important;}
+.stat-card,.pdf-card,.video-card,.affair-item,.admin-section{
+  background:var(--card)!important;border:1px solid var(--border)!important;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.stat-card:hover,.pdf-card:hover,.video-card:hover{
+  transform:translateY(-4px);box-shadow:var(--shadow)!important;
+}
+#navDate{
+  font-size:0.72rem;color:var(--text2);padding:4px 12px;
+  background:var(--bg3);border-radius:20px;border:1px solid var(--border);
+  white-space:nowrap;font-weight:500;letter-spacing:0.3px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">⚔ TRIKUL ACADEMY</a>
+  <div class="nav-links">
+    <a href="#pdfs-section">Study PDFs</a>
+    <a href="#videos-section">Videos</a>
+    <a href="#affairs-section">Current Affairs</a>
+    <a href="#task-section">Daily Task</a>
+    <span id="navDate"></span>
+    <span id="navDate"></span>
+    <span id="navDate"></span>
+    <button id="themeBtn" title="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">🏆 India's Premier Exam Prep Platform</div>
+  <h1 class="hero-title">Master Every Exam with<br/><span>Trikul Academy</span></h1>
+  <p class="hero-sub">Complete study material, video lectures, current affairs & daily practice — all in one place.</p>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="stat-pdfs">0</div><div class="stat-label">Study PDFs</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-videos">0</div><div class="stat-label">Video Lectures</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-affairs">0</div><div class="stat-label">Current Affairs</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-mcqs">0</div><div class="stat-label">MCQ Questions</div></div>
+  </div>
+</section>
+
+<!-- PDF SECTION -->
+<div id="pdfs-section" class="section">
+  <div class="section-header">
+    <h2 class="section-title">📚 Study PDFs</h2>
+    <div class="section-divider"></div>
+    <div class="filter-tabs" id="pdfFilters">
+      <button class="filter-tab active" data-cat="all">All</button>
+    </div>
+  </div>
+  <div class="grid" id="pdfGrid"><div class="loading"><div class="spin"></div> Loading PDFs...</div></div>
+</div>
+
+<!-- VIDEO SECTION -->
+<div id="videos-section" class="section">
+  <div class="section-header">
+    <h2 class="section-title">🎬 Video Lectures</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="grid" id="videoGrid"><div class="loading"><div class="spin"></div> Loading Videos...</div></div>
+</div>
+
+<!-- AFFAIRS SECTION -->
+<div id="affairs-section" class="section">
+  <div class="section-header">
+    <h2 class="section-title">📰 Current Affairs</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div id="affairsList"><div class="loading"><div class="spin"></div> Loading...</div></div>
+</div>
+
+<!-- DAILY TASK -->
+<div id="task-section" class="section">
+  <div class="section-header">
+    <h2 class="section-title">🎯 Daily Task</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div id="daily-task">
+    <div class="loading"><div class="spin"></div> Loading today's task...</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Trikul Academy. All rights reserved. | Built for exam warriors 🔥</p>
+</footer>
+
+<!-- SECRET DOT -->
+<div id="secretDot" title=""></div>
+
+<!-- Calculator button will be injected into the navbar. -->
+
+<!-- CALCULATOR MODAL (simplified) -->
+<div class="modal-overlay calc-modal" id="calcModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCalc()">✕</button>
+    <div class="modal-title">🧮 Calculator</div>
+    <div style="display:grid;gap:12px;">
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input id="calcDisplay" type="text" readonly style="flex:1;padding:10px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-size:1.2rem;text-align:right;" value=""/>
+        <button class="btn btn-outline" onclick="calcClear()">C</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+        <button class="btn" onclick="calcKey('7')">7</button>
+        <button class="btn" onclick="calcKey('8')">8</button>
+        <button class="btn" onclick="calcKey('9')">9</button>
+        <button class="btn btn-outline" onclick="calcKey('/')">÷</button>
+        <button class="btn" onclick="calcKey('4')">4</button>
+        <button class="btn" onclick="calcKey('5')">5</button>
+        <button class="btn" onclick="calcKey('6')">6</button>
+        <button class="btn btn-outline" onclick="calcKey('*')">×</button>
+        <button class="btn" onclick="calcKey('1')">1</button>
+        <button class="btn" onclick="calcKey('2')">2</button>
+        <button class="btn" onclick="calcKey('3')">3</button>
+        <button class="btn btn-outline" onclick="calcKey('-')">−</button>
+        <button class="btn" onclick="calcKey('0')">0</button>
+        <button class="btn" onclick="calcKey('.')">.</button>
+        <button class="btn btn-gold" onclick="calcEvaluate()">=</button>
+        <button class="btn btn-outline" onclick="calcKey('+')">+</button>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+        <button class="btn btn-outline" onclick="backspaceCalc()">⌫</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLogin()">✕</button>
+    <div class="modal-title">🔐 Admin Login</div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="loginEmail" placeholder="admin@trikul.com"/>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <div id="loginMsg"></div>
+    <button class="btn btn-gold" style="width:100%;margin-top:8px;" onclick="doLogin()">Login →</button>
+  </div>
+</div>
+
+<!-- PDF VIEWER MODAL -->
+<div class="modal-overlay" id="pdfModal">
+  <div class="modal-box" style="max-width:950px;height:92vh;display:flex;flex-direction:column;padding:20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <span id="pdfModalTitle" style="font-weight:700;font-size:1rem;"></span>
+      <button class="modal-close" style="position:static;" onclick="closePdfModal()">✕</button>
+    </div>
+    <iframe id="pdfFrame" src="" style="flex:1;border:none;border-radius:10px;background:#fff;"></iframe>
+  </div>
+</div>
+
+<!-- ADMIN OVERLAY -->
+<div id="adminOverlay">
+  <div class="admin-header">
+    <div>
+      <div class="admin-logo">⚔ TRIKUL ACADEMY — ADMIN</div>
+      <div class="admin-email" id="adminEmailDisplay"></div>
+    </div>
+    <button class="btn btn-outline" onclick="adminLogout()" style="font-size:0.82rem;padding:7px 14px;">Logout</button>
+  </div>
+  <div class="admin-body">
+    <!-- Dash Stats -->
+    <div class="dash-stats">
+      <div class="dash-stat"><div class="dash-stat-num" id="a-stat-pdfs">-</div><div class="dash-stat-label">Total PDFs</div></div>
+      <div class="dash-stat"><div class="dash-stat-num" id="a-stat-videos">-</div><div class="dash-stat-label">Videos</div></div>
+      <div class="dash-stat"><div class="dash-stat-num" id="a-stat-affairs">-</div><div class="dash-stat-label">Affairs</div></div>
+      <div class="dash-stat"><div class="dash-stat-num" id="a-stat-tasks">-</div><div class="dash-stat-label">Daily Tasks</div></div>
+    </div>
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchTab('pdfs')">📚 PDFs</button>
+      <button class="admin-tab" onclick="switchTab('videos')">🎬 Videos</button>
+      <button class="admin-tab" onclick="switchTab('affairs')">📰 Affairs</button>
+      <button class="admin-tab" onclick="switchTab('tasks')">🎯 Daily Task</button>
+      <button class="admin-tab" onclick="switchTab('analytics')">📊 Analytics</button>
+      <button class="admin-tab" onclick="switchTab('profile')">👤 Profile</button>
+      <button class="admin-tab" onclick="switchTab('profile')">👤 Profile</button>
+      <button class="admin-tab" onclick="switchTab('profile')">👤 Profile</button>
+    </div>
+
+    <!-- PDFs PANE -->
+    <div id="pane-pdfs" class="admin-pane active">
+      <div class="admin-section">
+        <h3>Add New PDF</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Title</label><input type="text" id="a-pdf-title" placeholder="PDF title"/></div>
+          <div class="form-group"><label>Category</label><input type="text" id="a-pdf-cat" placeholder="e.g. History, Polity"/></div>
+        </div>
+          <div class="form-group"><label>PDF URL (or leave blank to upload file)</label><input type="url" id="a-pdf-url" placeholder="https://..."/></div>
+          <div class="form-row">
+            <div class="form-group"><label>Upload PDF</label><input type="file" id="a-pdf-file" accept="application/pdf"/></div>
+            <div class="form-group"><label>Thumbnail Style — Color Start</label><input type="color" id="a-pdf-thumb-bg" value="#0f172a"/></div>
+            <div class="form-group"><label>Thumbnail Style — Color End</label><input type="color" id="a-pdf-thumb-bg-end" value="#0f766e"/></div>
+            <div class="form-group"><label>Thumbnail Title Font Size</label><input type="number" id="a-pdf-thumb-fs" value="56"/></div>
+          </div>
+          <button class="btn btn-gold" onclick="addPdf()">+ Add PDF</button>
+        <div id="a-pdf-msg"></div>
+      </div>
+      <div class="admin-section">
+        <h3>Existing PDFs</h3>
+        <div id="a-pdf-list"></div>
+      </div>
+    </div>
+
+    <!-- VIDEOS PANE -->
+    <div id="pane-videos" class="admin-pane">
+      <div class="admin-section">
+        <h3>Add New Video</h3>
+          <div class="form-group"><label>Title</label><input type="text" id="a-vid-title" placeholder="Video title"/></div>
+          <div class="form-group"><label>YouTube URL</label><input type="url" id="a-vid-url" placeholder="https://youtube.com/watch?v=..."/></div>
+          <div class="form-row">
+            <div class="form-group"><label>Thumbnail Style — Color Start</label><input type="color" id="a-vid-thumb-bg" value="#0f172a"/></div>
+            <div class="form-group"><label>Thumbnail Style — Color End</label><input type="color" id="a-vid-thumb-bg-end" value="#0f766e"/></div>
+            <div class="form-group"><label>Thumbnail Title Font Size</label><input type="number" id="a-vid-thumb-fs" value="56"/></div>
+          </div>
+          <button class="btn btn-gold" onclick="addVideo()">+ Add Video</button>
+        <div id="a-vid-msg"></div>
+      </div>
+      <div class="admin-section">
+        <h3>Existing Videos</h3>
+        <div id="a-vid-list"></div>
+      </div>
+    </div>
+
+    <!-- AFFAIRS PANE -->
+    <div id="pane-affairs" class="admin-pane">
+      <div class="admin-section">
+        <h3>Publish Current Affairs</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Title</label><input type="text" id="a-aff-title" placeholder="Headline"/></div>
+          <div class="form-group"><label>Date</label><input type="date" id="a-aff-date"/></div>
+        </div>
+        <div class="form-group"><label>Content</label><textarea id="a-aff-content" rows="5" placeholder="Write content here..."></textarea></div>
+        <div class="form-group"><label>MCQs JSON (removed)</label><div class="msg ok">MCQ support removed for Current Affairs per admin request.</div></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-gold" onclick="addAffair()">Publish</button>
+        </div>
+        <div id="a-aff-msg"></div>
+      </div>
+      <div class="admin-section">
+        <h3>Published Affairs</h3>
+        <div id="a-aff-list"></div>
+      </div>
+    </div>
+
+    <!-- TASKS PANE -->
+    <div id="pane-tasks" class="admin-pane">
+      <div class="admin-section">
+        <h3>Set Today's Task</h3>
+        <div class="form-group"><label>Question</label><textarea id="a-task-q" rows="3" placeholder="Enter MCQ question..."></textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label>Option A</label><input type="text" id="a-task-a"/></div>
+          <div class="form-group"><label>Option B</label><input type="text" id="a-task-b"/></div>
+          <div class="form-group"><label>Option C</label><input type="text" id="a-task-c"/></div>
+          <div class="form-group"><label>Option D</label><input type="text" id="a-task-d"/></div>
+        </div>
+        <div class="form-group">
+          <label>Correct Answer</label>
+          <select id="a-task-correct">
+            <option value="0">A</option><option value="1">B</option>
+            <option value="2">C</option><option value="3">D</option>
+          </select>
+        </div>
+        <button class="btn btn-gold" onclick="saveTask()">💾 Save Task</button>
+        <div id="a-task-msg"></div>
+      </div>
+    </div>
+
+
+    <!-- PROFILE PANE -->
+    <div id="pane-profile" class="admin-pane">
+      <div class="admin-section">
+        <h3>🏫 Academy Profile</h3>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin-bottom:20px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+            <div id="logoPreview" style="width:110px;height:110px;border-radius:50%;background:var(--bg3);border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:2.8rem;overflow:hidden;">⚔</div>
+            <label class="btn btn-outline" style="cursor:pointer;font-size:0.8rem;padding:6px 14px;">
+              📷 Upload Logo
+              <input type="file" accept="image/*" id="logoUpload" style="display:none;" onchange="previewLogo(this)"/>
+            </label>
+          </div>
+          <div style="flex:1;min-width:220px;display:grid;gap:12px;">
+            <div class="form-group"><label>Academy Name</label><input type="text" id="p-name" placeholder="Trikul Academy"/></div>
+            <div class="form-group"><label>Tagline</label><input type="text" id="p-tagline" placeholder="India's Premier Exam Prep Platform"/></div>
+            <div class="form-group" style="grid-column:1/-1"><label>Bio / About Academy</label><textarea id="p-bio" rows="3" style="width:100%;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);resize:vertical;"></textarea></div>
+            <div class="form-group"><label>Contact Email</label><input type="email" id="p-email" placeholder="contact@trikul.com"/></div>
+          </div>
+        </div>
+        <h3>📣 Social Media Links</h3>
+        <div class="form-row">
+          <div class="form-group"><label>📺 YouTube</label><input type="url" id="p-youtube" placeholder="https://youtube.com/@channel"/></div>
+          <div class="form-group"><label>📞 Phone</label><input type="tel" id="p-phone" placeholder="+91XXXXXXXXXX"/></div>
+          <div class="form-group"><label>📸 Instagram</label><input type="url" id="p-instagram" placeholder="https://instagram.com/account"/></div>
+          <div class="form-group"><label>💬 WhatsApp</label><input type="url" id="p-whatsapp" placeholder="https://wa.me/91XXXXXXXXXX"/></div>
+          <div class="form-group"><label>📘 Facebook</label><input type="url" id="p-facebook" placeholder="https://facebook.com/yourpage"/></div>
+        </div>
+        <button class="btn btn-gold" id="saveProfileBtn" onclick="saveProfile()" style="margin-top:10px;">💾 Save Profile</button>
+        <div id="p-msg"></div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;"/>
+        <h3>🗂️ Custom Social Categories</h3>
+        <p style="color:var(--text2);font-size:0.82rem;margin-bottom:12px;">Batches, groups, notes — koi bhi custom link add karo jo users ko dikhega</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+          <input type="text" id="cat-icon" placeholder="📚 Icon (emoji)" style="width:80px;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);text-align:center;font-size:1.1rem;"/>
+          <input type="text" id="cat-name" placeholder="Category Name (e.g. SSC Batch 2025)" style="flex:1;min-width:140px;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);"/>
+          <input type="url" id="cat-url" placeholder="https://wa.me/... ya koi bhi link" style="flex:2;min-width:180px;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);"/>
+          <button class="btn btn-gold" onclick="addSocialCategory()" style="white-space:nowrap;">➕ Add</button>
+        </div>
+        <div id="cat-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+      </div>
+    </div>
+
+
+    <!-- ANALYTICS PANE -->
+    <div id="pane-analytics" class="admin-pane">
+      <div class="admin-section">
+        <h3>Analytics Log</h3>
+        <div id="a-analytics-wrap"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>window._cats=[];
+
+// ─── STATE ───────────────────────────────────────────────
+let token = localStorage.getItem('trikul_token');
+let dotClicks = 0, dotTimer;
+let allPdfs = [], allVideos = [], allAffairs = [];
+
+// ─── THEME ───────────────────────────────────────────────
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('trikul_theme') || 'dark';
+applyTheme(theme);
+
+function applyTheme(t) {
+  theme = t;
+  html.setAttribute('data-theme', t);
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('trikul_theme', t);
+}
+themeBtn.onclick = () => applyTheme(theme === 'dark' ? 'light' : 'dark');
+
+// ─── SECRET DOT ──────────────────────────────────────────
+document.getElementById('secretDot').onclick = () => {
+  dotClicks++;
+  clearTimeout(dotTimer);
+  dotTimer = setTimeout(() => { dotClicks = 0; }, 1500);
+  if (dotClicks >= 3) {
+    dotClicks = 0;
+    if (token) { verifyAndOpenAdmin(); }
+    else { document.getElementById('loginModal').classList.add('open'); }
+  }
+};
+
+// ─── AUTH ────────────────────────────────────────────────
+function closeLogin() {
+  document.getElementById('loginModal').classList.remove('open');
+  document.getElementById('loginMsg').textContent = '';
+}
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value;
+  const pass = document.getElementById('loginPass').value;
+  const msgEl = document.getElementById('loginMsg');
+  msgEl.textContent = '';
+  try {
+    const r = await fetch('/api/auth/login', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ email, password: pass })
+    });
+    const data = await r.json();
+    if (data.token) {
+      token = data.token;
+      localStorage.setItem('trikul_token', token);
+      closeLogin();
+      openAdmin(data.email);
+    } else {
+      msgEl.innerHTML = '<div class="msg err">' + (data.error || 'Login failed') + '</div>';
+    }
+  } catch(e) {
+    msgEl.innerHTML = '<div class="msg err">Connection error</div>';
+  }
+}
+
+async function verifyAndOpenAdmin() {
+  try {
+    const r = await fetch('/api/auth/verify', { headers: { Authorization: 'Bearer ' + token }});
+    const data = await r.json();
+    if (data.valid) openAdmin(data.user.email);
+    else { token = null; localStorage.removeItem('trikul_token'); document.getElementById('loginModal').classList.add('open'); }
+  } catch { document.getElementById('loginModal').classList.add('open'); }
+}
+
+// ─── ADMIN PANEL ─────────────────────────────────────────
+function openAdmin(email) {
+  document.getElementById('adminEmailDisplay').textContent = email || '';
+  document.getElementById('adminOverlay').classList.add('open');
+  loadAdminData();
+}
+
+function adminLogout() {
+  token = null;
+  localStorage.removeItem('trikul_token');
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach((t,i) => {
+    const tabs = ['pdfs','videos','affairs','tasks','analytics','profile'];
+    t.classList.toggle('active', tabs[i] === tab);
+  });
+  document.querySelectorAll('.admin-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('pane-' + tab).classList.add('active');
+  if (tab === 'analytics') loadAnalytics();
+  if (tab === 'profile') loadProfile();
+}
+
+async function loadAdminData() {
+  const [pdfs, videos, affairs] = await Promise.all([
+    fetch('/api/pdfs').then(r=>r.json()).catch(()=>[]),
+    fetch('/api/videos').then(r=>r.json()).catch(()=>[]),
+    fetch('/api/affairs').then(r=>r.json()).catch(()=>[])
+  ]);
+  document.getElementById('a-stat-pdfs').textContent = pdfs.length;
+  document.getElementById('a-stat-videos').textContent = videos.length;
+  document.getElementById('a-stat-affairs').textContent = affairs.length;
+
+  renderAdminPdfs(pdfs);
+  renderAdminVideos(videos);
+  renderAdminAffairs(affairs);
+
+  // task count
+  const task = await fetch('/api/tasks').then(r=>r.json()).catch(()=>null);
+  document.getElementById('a-stat-tasks').textContent = task ? '1' : '0';
+}
+
+function renderAdminPdfs(pdfs) {
+  const el = document.getElementById('a-pdf-list');
+  if (!pdfs.length) { el.innerHTML = '<div class="empty-state">No PDFs added yet.</div>'; return; }
+  el.innerHTML = pdfs.map(p => `
+    <div class="list-item">
+      <div class="list-item-info">
+        <div class="list-item-title">${escHtml(p.title)}</div>
+        <div class="list-item-meta">${escHtml(p.category||'')} • ${p.views||0} views</div>
+      </div>
+      <button class="btn btn-red" onclick="deletePdf('${p.id}')">Delete</button>
+    </div>`).join('');
+}
+
+function renderAdminVideos(videos) {
+  const el = document.getElementById('a-vid-list');
+  if (!videos.length) { el.innerHTML = '<div class="empty-state">No videos added yet.</div>'; return; }
+  el.innerHTML = videos.map(v => `
+    <div class="list-item">
+      <div class="list-item-info">
+        <div class="list-item-title">${escHtml(v.title)}</div>
+        <div class="list-item-meta">${v.clicks||0} clicks</div>
+      </div>
+      <button class="btn btn-red" onclick="deleteVideo('${v.id}')">Delete</button>
+    </div>`).join('');
+}
+
+function renderAdminAffairs(affairs) {
+  const el = document.getElementById('a-aff-list');
+  if (!affairs.length) { el.innerHTML = '<div class="empty-state">No affairs published yet.</div>'; return; }
+  el.innerHTML = affairs.map(a => `
+    <div class="list-item">
+      <div class="list-item-info">
+        <div class="list-item-title">${escHtml(a.title)}</div>
+        <div class="list-item-meta">${a.date||''}</div>
+      </div>
+      <button class="btn btn-red" onclick="deleteAffair('${a.id}')">Delete</button>
+    </div>`).join('');
+}
+
+// ─── ADMIN ACTIONS ───────────────────────────────────────
+async function addPdf() {
+  const title = document.getElementById('a-pdf-title').value.trim();
+  const category = document.getElementById('a-pdf-cat').value.trim();
+  const url = document.getElementById('a-pdf-url').value.trim();
+  const fileEl = document.getElementById('a-pdf-file');
+  const thumbBg = document.getElementById('a-pdf-thumb-bg').value;
+  const thumbBgEnd = document.getElementById('a-pdf-thumb-bg-end').value;
+  const thumbFs = document.getElementById('a-pdf-thumb-fs').value;
+  const msg = document.getElementById('a-pdf-msg');
+  msg.innerHTML = '';
+  if (!title) { msg.innerHTML='<div class="msg err">Title required.</div>'; return; }
+
+  // If a PDF file is selected, upload via multipart to /api/pdfs/upload
+  if (fileEl && fileEl.files && fileEl.files.length) {
+  const form = new FormData();
+  form.append('title', title);
+  form.append('category', category);
+  form.append('pdf', fileEl.files[0]);
+  form.append('thumb_bg', thumbBg || '');
+  form.append('thumb_bg_end', thumbBgEnd || '');
+  form.append('thumb_fs', thumbFs || '');
+    try {
+      const r = await fetch('/api/pdfs/upload', { method: 'POST', headers: { Authorization: 'Bearer ' + token }, body: form });
+      const data = await r.json();
+      if (data.id) {
+        msg.innerHTML = '<div class="msg ok">✓ PDF uploaded!</div>';
+        document.getElementById('a-pdf-title').value='';
+        document.getElementById('a-pdf-cat').value='';
+        document.getElementById('a-pdf-url').value='';
+        fileEl.value = null;
+        await loadAdminData();
+      } else { msg.innerHTML = `<div class="msg err">${data.error||'Upload failed'}</div>`; }
+    } catch (err) { msg.innerHTML = `<div class="msg err">${err.message}</div>`; }
+    return;
+  }
+
+  // Otherwise fallback to URL-based add
+  if (!url) { msg.innerHTML='<div class="msg err">Provide a URL or upload a PDF file.</div>'; return; }
+  const r = await authPost('/api/pdfs', { title, category, url });
+  if (r.id) {
+    msg.innerHTML='<div class="msg ok">✓ PDF added!</div>';
+    document.getElementById('a-pdf-title').value='';
+    document.getElementById('a-pdf-cat').value='';
+    document.getElementById('a-pdf-url').value='';
+    await loadAll(); await loadAdminData();
+  } else { msg.innerHTML=`<div class="msg err">${r.error||'Error'}</div>`; }
+}
+
+async function deletePdf(id) {
+  if (!confirm('Delete this PDF?')) return;
+  await authDelete('/api/pdfs/' + id);
+  await loadAll(); await loadAdminData();
+}
+
+async function addVideo() {
+  const title = document.getElementById('a-vid-title').value.trim();
+  const url = document.getElementById('a-vid-url').value.trim();
+  const thumbBg = document.getElementById('a-vid-thumb-bg').value;
+  const thumbBgEnd = document.getElementById('a-vid-thumb-bg-end').value;
+  const thumbFs = document.getElementById('a-vid-thumb-fs').value;
+  const msg = document.getElementById('a-vid-msg');
+  msg.innerHTML = '';
+  if (!title || !url) { msg.innerHTML='<div class="msg err">Title and URL required.</div>'; return; }
+
+  if (true) {
+    // Use style options to generate thumbnail server-side if no manual image upload
+    const form = new FormData();
+    form.append('title', title);
+    form.append('url', url);
+    form.append('thumb_bg', thumbBg || '');
+    form.append('thumb_bg_end', thumbBgEnd || '');
+    form.append('thumb_fs', thumbFs || '');
+    try {
+      const r = await fetch('/api/videos/upload', { method: 'POST', headers: { Authorization: 'Bearer ' + token }, body: form });
+      const data = await r.json();
+      if (data.id) {
+        msg.innerHTML = '<div class="msg ok">✓ Video uploaded!</div>';
+        document.getElementById('a-vid-title').value='';
+        document.getElementById('a-vid-url').value='';
+        // reset style inputs
+        document.getElementById('a-vid-thumb-bg').value = '#0f172a';
+        document.getElementById('a-vid-thumb-bg-end').value = '#0f766e';
+        document.getElementById('a-vid-thumb-fs').value = '56';
+        await loadAll(); await loadAdminData();
+      } else { msg.innerHTML = `<div class="msg err">${data.error||'Upload failed'}</div>`; }
+    } catch (err) { msg.innerHTML = `<div class="msg err">${err.message}</div>`; }
+    return;
+  }
+
+  const r = await authPost('/api/videos', { title, url });
+  if (r.id) {
+    msg.innerHTML='<div class="msg ok">✓ Video added!</div>';
+    document.getElementById('a-vid-title').value='';
+    document.getElementById('a-vid-url').value='';
+    await loadAll(); await loadAdminData();
+  } else { msg.innerHTML=`<div class="msg err">${r.error||'Error'}</div>`; }
+}
+
+async function deleteVideo(id) {
+  if (!confirm('Delete this video?')) return;
+  await authDelete('/api/videos/' + id);
+  await loadAll(); await loadAdminData();
+}
+
+async function addAffair() {
+  const title = document.getElementById('a-aff-title').value.trim();
+  const content = document.getElementById('a-aff-content').value.trim();
+  const date = document.getElementById('a-aff-date').value;
+  const msg = document.getElementById('a-aff-msg');
+  if (!title || !content) { msg.innerHTML='<div class="msg err">Title and content required.</div>'; return; }
+  const r = await authPost('/api/affairs', { title, content, date, mcqs: [] });
+  if (r.id) {
+    msg.innerHTML='<div class="msg ok">✓ Published!</div>';
+    document.getElementById('a-aff-title').value='';
+    document.getElementById('a-aff-content').value='';
+    await loadAll(); await loadAdminData();
+  } else { msg.innerHTML=`<div class="msg err">${r.error||'Error'}</div>`; }
+}
+
+async function deleteAffair(id) {
+  if (!confirm('Delete this affair?')) return;
+  await authDelete('/api/affairs/' + id);
+  await loadAll(); await loadAdminData();
+}
+
+async function saveTask() {
+  const question = document.getElementById('a-task-q').value.trim();
+  const a = document.getElementById('a-task-a').value.trim();
+  const b = document.getElementById('a-task-b').value.trim();
+  const c = document.getElementById('a-task-c').value.trim();
+  const d = document.getElementById('a-task-d').value.trim();
+  const correct_index = parseInt(document.getElementById('a-task-correct').value);
+  const msg = document.getElementById('a-task-msg');
+  if (!question || !a || !b || !c || !d) { msg.innerHTML='<div class="msg err">All fields required.</div>'; return; }
+  const r = await authPost('/api/tasks', { question, options: [a, b, c, d], correct_index });
+  if (r.id) {
+    msg.innerHTML='<div class="msg ok">✓ Task saved!</div>';
+    renderDailyTask(r);
+  } else { msg.innerHTML=`<div class="msg err">${r.error||'Error'}</div>`; }
+}
+
+async function generateMCQ() {
+  // MCQ generation removed from admin UI.
+}
+
+async function loadAnalytics() {
+  const wrap = document.getElementById('a-analytics-wrap');
+  wrap.innerHTML = '<div class="loading"><div class="spin"></div> Loading...</div>';
+  const data = await fetch('/api/analytics', { headers: { Authorization: 'Bearer ' + token }})
+    .then(r=>r.json()).catch(()=>[]);
+  if (!data.length) { wrap.innerHTML='<div class="empty-state">No analytics data yet.</div>'; return; }
+  wrap.innerHTML = `<div style="overflow-x:auto"><table class="analytics-table">
+    <thead><tr><th>Type</th><th>Content ID</th><th>Action</th><th>Time</th></tr></thead>
+    <tbody>${data.map(a=>`<tr>
+      <td><span class="badge-type badge-${a.content_type}">${a.content_type}</span></td>
+      <td>${a.content_id||'-'}</td>
+      <td>${a.action}</td>
+      <td>${new Date(a.created_at).toLocaleString()}</td>
+    </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+// ─── HELPERS ─────────────────────────────────────────────
+async function authPost(url, body) {
+  const r = await fetch(url, {
+    method: 'POST', headers: { 'Content-Type':'application/json', Authorization: 'Bearer ' + token },
+    body: JSON.stringify(body)
+  });
+  return r.json();
+}
+async function authDelete(url) {
+  await fetch(url, { method: 'DELETE', headers: { Authorization: 'Bearer ' + token }});
+}
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── STUDENT PAGE ─────────────────────────────────────────
+function getYtId(url) {
+  const m = url.match(/(?:youtu\.be\/|v=|embed\/)([^?&\s]+)/);
+  return m ? m[1] : null;
+}
+
+async function loadAll() {
+  await Promise.all([loadPdfs(), loadVideos(), loadAffairs(), loadTask()]);
+}
+
+async function loadPdfs() {
+  const pdfs = await fetch('/api/pdfs').then(r=>r.json()).catch(()=>[]);
+  allPdfs = Array.isArray(pdfs) ? pdfs : [];
+  document.getElementById('stat-pdfs').textContent = allPdfs.length;
+
+  // build category filters
+  const cats = [...new Set(allPdfs.map(p=>p.category).filter(Boolean))];
+  const filtersEl = document.getElementById('pdfFilters');
+  filtersEl.innerHTML = '<button class="filter-tab active" data-cat="all">All</button>' +
+    cats.map(c=>`<button class="filter-tab" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('');
+  filtersEl.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.onclick = () => {
+      filtersEl.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderPdfs(btn.dataset.cat);
+    };
+  });
+  renderPdfs('all');
+}
+
+function renderPdfs(cat) {
+  const grid = document.getElementById('pdfGrid');
+  const filtered = cat === 'all' ? allPdfs : allPdfs.filter(p=>p.category===cat);
+  if (!filtered.length) { grid.innerHTML='<div class="empty-state" style="grid-column:1/-1">No PDFs in this category.</div>'; return; }
+  grid.innerHTML = filtered.map(p=>`
+    <div class="pdf-card">
+      <span class="pdf-badge">${escHtml(p.category||'PDF')}</span>
+      ${p.thumbnail_url?`<div style="height:140px;overflow:hidden;border-radius:10px;margin-bottom:10px;"><img src="${escHtml(p.thumbnail_url)}" style="width:100%;height:100%;object-fit:cover"/></div>`:''}
+      <div class="pdf-title">${escHtml(p.title)}</div>
+      <div class="pdf-meta">👁 ${p.views||0} views</div>
+      <button class="btn btn-gold" onclick="openPdf('${p.id}','${escHtml(p.url)}','${escHtml(p.title)}')">📖 Read</button>
+    </div>`).join('');
+}
+
+async function openPdf(id, url, title) {
+  document.getElementById('pdfModalTitle').textContent = title;
+  document.getElementById('pdfFrame').src = url;
+  document.getElementById('pdfModal').classList.add('open');
+  await fetch('/api/pdfs/' + id + '/view', { method: 'PATCH' });
+}
+function closePdfModal() {
+  document.getElementById('pdfModal').classList.remove('open');
+  document.getElementById('pdfFrame').src = '';
+}
+
+async function loadVideos() {
+  const videos = await fetch('/api/videos').then(r=>r.json()).catch(()=>[]);
+  allVideos = Array.isArray(videos) ? videos : [];
+  document.getElementById('stat-videos').textContent = allVideos.length;
+  const grid = document.getElementById('videoGrid');
+  if (!allVideos.length) { grid.innerHTML='<div class="empty-state" style="grid-column:1/-1">No videos yet. Check back soon!</div>'; return; }
+  grid.innerHTML = allVideos.map(v=>{
+    const ytId = getYtId(v.url);
+    const thumb = v.thumbnail_url ? v.thumbnail_url : (ytId ? `https://img.youtube.com/vi/${ytId}/mqdefault.jpg` : '');
+    return `<div class="video-card">
+      <div class="video-thumb" onclick="openVideo('${v.id}','${escHtml(v.url)}')">
+        ${thumb ? `<img src="${escHtml(thumb)}" alt="${escHtml(v.title)}" loading="lazy"/>` : '<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--text2)">🎬</div>'}
+        <div class="play-overlay"><div class="play-btn-big">▶</div></div>
+      </div>
+      <div class="video-info">
+        <div class="video-title">${escHtml(v.title)}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="video-meta">🖱 ${v.clicks||0} clicks</div>
+          <button class="btn btn-blue" style="font-size:0.8rem;padding:7px 14px;" onclick="openVideo('${v.id}','${escHtml(v.url)}')">Watch ↗</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function openVideo(id, url) {
+  await fetch('/api/videos/' + id + '/click', { method: 'PATCH' });
+  window.open(url, '_blank');
+}
+
+async function loadAffairs() {
+  const affairs = await fetch('/api/affairs').then(r=>r.json()).catch(()=>[]);
+  allAffairs = Array.isArray(affairs) ? affairs : [];
+  document.getElementById('stat-affairs').textContent = allAffairs.length;
+
+  let mcqCount = 0;
+  allAffairs.forEach(a => { if (a.mcqs && Array.isArray(a.mcqs)) mcqCount += a.mcqs.length; });
+  document.getElementById('stat-mcqs').textContent = mcqCount;
+
+  const list = document.getElementById('affairsList');
+  if (!allAffairs.length) { list.innerHTML='<div class="empty-state">No current affairs published yet.</div>'; return; }
+  list.innerHTML = allAffairs.map((a,i)=>`
+    <div class="affair-item" id="affair-${i}">
+      <div class="affair-header" onclick="toggleAffair(${i})">
+        <div>
+          <div class="affair-date">${a.date||'Latest'}</div>
+          <div class="affair-title-text">${escHtml(a.title)}</div>
+        </div>
+        <span class="affair-arrow">▾</span>
+      </div>
+      <div class="affair-body">
+        <div class="affair-content">${escHtml(a.content)}</div>
+        ${renderMcqs(a.mcqs, 'aff-' + i)}
+      </div>
+    </div>`).join('');
+}
+
+function toggleAffair(i) {
+  const el = document.getElementById('affair-' + i);
+  el.classList.toggle('open');
+}
+
+function renderMcqs(mcqs, prefix) {
+  if (!mcqs || !mcqs.length) return '';
+  return mcqs.map((m, mi) => `
+    <div class="mcq-block">
+      <div class="mcq-q">Q${mi+1}. ${escHtml(m.question)}</div>
+      <div class="mcq-options">
+        ${(m.options||[]).map((opt,oi)=>`
+          <button class="mcq-opt" id="${prefix}-mcq${mi}-opt${oi}"
+            onclick="checkMcq('${prefix}-mcq${mi}', ${oi}, ${m.correct_index})">
+            ${String.fromCharCode(65+oi)}. ${escHtml(opt)}
+          </button>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function checkMcq(prefix, chosen, correct) {
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById(prefix + '-opt' + i);
+    if (!el) continue;
+    el.disabled = true;
+    if (i === correct) el.classList.add('correct');
+    else if (i === chosen) el.classList.add('wrong');
+  }
+}
+
+async function loadTask() {
+  const task = await fetch('/api/tasks').then(r=>r.json()).catch(()=>null);
+  renderDailyTask(task);
+}
+
+function renderDailyTask(task) {
+  const el = document.getElementById('daily-task');
+  if (!task) {
+    el.innerHTML=`<div class="task-label">Today's Challenge</div><div class="task-question" style="color:var(--text2)">No task set for today. Check back soon! 📚</div>`;
+    return;
+  }
+  const opts = (task.options || []);
+  el.innerHTML = `
+    <div class="task-label">🎯 Today's Challenge</div>
+    <div class="task-question">${escHtml(task.question)}</div>
+    <div class="task-opts">
+      ${opts.map((o,i)=>`<button class="task-opt" id="task-opt-${i}" onclick="checkTask(${i},${task.correct_index})">${String.fromCharCode(65+i)}. ${escHtml(o)}</button>`).join('')}
+    </div>
+    <div id="taskResult"></div>`;
+}
+
+function checkTask(chosen, correct) {
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('task-opt-' + i);
+    if (!el) continue;
+    el.disabled = true;
+    if (i === correct) el.classList.add('correct');
+    else if (i === chosen) el.classList.add('wrong');
+  }
+  const res = document.getElementById('taskResult');
+  if (chosen === correct) {
+    res.innerHTML = '🎉 Correct! Great job!';
+    res.style.color = 'var(--green)';
+    saveStreak();
+  } else {
+    res.innerHTML = `❌ Wrong. Correct answer: ${String.fromCharCode(65 + correct)}`;
+    res.style.color = 'var(--red)';
+  }
+}
+
+async function saveStreak() {
+  const fp = btoa(navigator.userAgent + screen.width).substring(0, 20);
+  await fetch('/api/streak/complete', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ fingerprint: fp })
+  }).catch(()=>{});
+}
+
+// ─── INIT ────────────────────────────────────────────────
+// ─── CALCULATOR LOGIC ───────────────────────────────────
+const calcModal = document.getElementById('calcModal');
+// Inject calculator button into navbar
+const navLinks = document.querySelector('#navbar .nav-links');
+if (navLinks) {
+  const existing = document.getElementById('calcNavBtn');
+  if (!existing) {
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-outline';
+    btn.id = 'calcNavBtn';
+    btn.style.marginRight = '6px';
+    btn.textContent = '🧮 Calc';
+    const themeBtn = document.getElementById('themeBtn');
+    if (themeBtn) navLinks.insertBefore(btn, themeBtn);
+    else navLinks.appendChild(btn);
+    btn.onclick = () => { calcModal.classList.add('open'); };
+  }
+}
+function closeCalc() { calcModal.classList.remove('open'); }
+
+// Simple calculator keypad logic
+function calcKey(k) {
+  const d = document.getElementById('calcDisplay');
+  if (!d) return;
+  d.value = (d.value || '') + k;
+}
+function calcClear() { const d = document.getElementById('calcDisplay'); if (d) d.value = ''; }
+function calcEvaluate() {
+  const d = document.getElementById('calcDisplay');
+  if (!d) return;
+  try {
+    // sanitize expression: allow digits, operators, parentheses, dot, spaces
+    const safe = d.value.replace(/[^0-9+\-*/(). %]/g, '');
+    // Evaluate using Function to avoid eval scoping issues
+    const result = Function('return ' + safe)();
+    d.value = String(result);
+  } catch (e) { d.value = 'Error'; }
+}
+function backspaceCalc(){ const d = document.getElementById('calcDisplay'); if(d) d.value = (d.value||'').slice(0,-1); }
+
+// DATE
+function updateNavDate(){
+  const el=document.getElementById('navDate');if(!el)return;
+  const n=new Date(),dy=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+  mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  el.textContent=dy[n.getDay()]+', '+n.getDate()+' '+mo[n.getMonth()]+' '+n.getFullYear()+' | '+n.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+}
+setInterval(updateNavDate,1000);updateNavDate();
+// PROFILE
+
+function addSocialCategory(){
+  var iconEl=document.getElementById('cat-icon');
+  var icon=iconEl?iconEl.value.trim():'';
+  if(!icon)icon='🔗';
+  var name=document.getElementById('cat-name').value.trim();
+  var url=document.getElementById('cat-url').value.trim();
+  if(!name||!url){alert('Name aur URL dono bharo!');return;}
+  if(!window._cats)window._cats=[];
+  window._cats.push({id:String(Date.now()),icon:icon,name:name,url:url});
+  if(iconEl)iconEl.value='';
+  document.getElementById('cat-name').value='';
+  document.getElementById('cat-url').value='';
+  renderCategories();
+}
+function removeCategory(id){
+  if(!window._cats)window._cats=[];
+  window._cats=window._cats.filter(function(c){return c.id!==id;});
+  renderCategories();
+}
+function renderCategories(){
+  var el=document.getElementById('cat-list');if(!el)return;
+  if(!window._cats||!window._cats.length){el.innerHTML='';return;}
+  el.innerHTML=window._cats.map(function(c){
+    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;">'+
+    '<span style="font-size:1.2rem;">'+c.icon+'</span>'+
+    '<span style="flex:1;font-weight:600;color:var(--text);font-size:0.88rem;">'+c.name+'</span>'+
+    '<a href="'+c.url+'" target="_blank" style="color:var(--teal);font-size:0.75rem;">'+c.url.substring(0,25)+'...</a>'+
+    '<button onclick="removeCategory('+JSON.stringify(c.id)+')" style="background:var(--red);color:#fff;border:none;border-radius:6px;padding:3px 10px;cursor:pointer;">x</button>'+
+    '</div>';
+  }).join('');
+}
+function loadProfile(){
+  const token = localStorage.getItem('adminToken')||localStorage.getItem('trikul_token')||'';
+  fetch('/api/profile')
+    .then(r=>r.json())
+    .then(p=>{
+      if(!p) return;
+      ['name','tagline','bio','email','youtube','phone','instagram','whatsapp','facebook'].forEach(k=>{
+        const el=document.getElementById('p-'+k);if(el&&p[k])el.value=p[k];
+      });
+      if(p.logo_url){
+        const lp=document.getElementById('logoPreview');
+        if(lp)lp.innerHTML='<img src="'+p.logo_url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%"/>';
+        localStorage.setItem('trikul_logo',p.logo_url);
+      }
+      if(p.social_categories){
+        window._cats = p.social_categories;
+        renderCategories();
+      }
+      localStorage.setItem('trikul_profile',JSON.stringify(p));
+      applyProfileToSite(p);
+      showUserProfileBanner(p);
+    })
+    .catch(()=>{
+      const p=JSON.parse(localStorage.getItem('trikul_profile')||'{}');
+      ['name','tagline','bio','email','youtube','phone','instagram','whatsapp','facebook'].forEach(k=>{
+        const el=document.getElementById('p-'+k);if(el&&p[k])el.value=p[k];
+      });
+      applyProfileToSite(p);
+    });
+}
+function saveProfile(){
+  const p={};
+  ['name','tagline','bio','email','youtube','phone','instagram','whatsapp','facebook'].forEach(k=>{
+    const el=document.getElementById('p-'+k);if(el)p[k]=el.value.trim();
+  });
+  p.social_categories = window._cats||[];
+  const logo=localStorage.getItem('trikul_logo');
+  if(logo) p.logo_url=logo;
+  const m=document.getElementById('p-msg');
+  const token=localStorage.getItem('adminToken')||localStorage.getItem('trikul_token')||'';
+  fetch('/api/profile',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+    body:JSON.stringify(p)
+  })
+  .then(r=>r.json())
+  .then(res=>{
+    if(res.success){
+      localStorage.setItem('trikul_profile',JSON.stringify(p));
+      applyProfileToSite(p);
+      showUserProfileBanner(p);
+      if(m){m.innerHTML='<div style="color:var(--green);padding:8px;margin-top:8px;">✅ Profile saved to database!</div>';
+      setTimeout(()=>{if(m)m.innerHTML='';},3000);}
+    } else {
+      if(m)m.innerHTML='<div style="color:var(--red);padding:8px;">❌ Save failed: '+(res.error||'Unknown error')+'</div>';
+    }
+  })
+  .catch(e=>{
+    localStorage.setItem('trikul_profile',JSON.stringify(p));
+    applyProfileToSite(p);
+    showUserProfileBanner(p);
+    if(m){m.innerHTML='<div style="color:orange;padding:8px;">⚠️ Offline mode - locally saved</div>';
+    setTimeout(()=>{if(m)m.innerHTML='';},3000);}
+  });
+}
+function previewLogo(input){
+  if(!input.files[0])return;
+  const r=new FileReader();
+  r.onload=e=>{
+    localStorage.setItem('trikul_logo',e.target.result);
+    const lp=document.getElementById('logoPreview');
+    if(lp)lp.innerHTML='<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%"/>';
+  };r.readAsDataURL(input.files[0]);
+}
+function applyProfileToSite(p){
+  if(p.name){const l=document.querySelector('.nav-logo');if(l)l.textContent='⚔ '+p.name.toUpperCase();}
+  const footer=document.querySelector('footer');if(!footer)return;
+  const links=[
+    p.youtube&&'<a href="'+p.youtube+'" target="_blank">📺 YouTube</a>',
+    p.phone&&'<a href="tel:'+p.phone+'">📞 Call Us</a>',
+    p.instagram&&'<a href="'+p.instagram+'" target="_blank">📸 Instagram</a>',
+    p.whatsapp&&'<a href="'+p.whatsapp+'" target="_blank">💬 WhatsApp</a>',
+    p.facebook&&'<a href="'+p.facebook+'" target="_blank">📘 Facebook</a>',
+    p.email&&'<a href="mailto:'+p.email+'">✉ '+p.email+'</a>',
+  ].filter(Boolean).join(' • ');
+  if(links){
+    let sd=document.getElementById('footerSocials');
+    if(!sd){sd=document.createElement('div');sd.id='footerSocials';
+    sd.style.cssText='margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-size:0.85rem;';
+    footer.appendChild(sd);}
+    sd.innerHTML='<style>#footerSocials a{color:var(--gold);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:14px;transition:all 0.2s;}#footerSocials a:hover{background:var(--gold);color:#000;}</style>'+links;
+  }
+}
+// Auto-apply saved profile
+function showUserProfileBanner(p){
+  let b=document.getElementById('userProfileBanner');
+  if(!b){
+    b=document.createElement('div');b.id='userProfileBanner';
+    b.style.cssText='background:var(--card);border-bottom:2px solid var(--border);padding:7px 20px;display:flex;align-items:center;gap:12px;font-size:0.83rem;color:var(--text2);flex-wrap:wrap;position:sticky;top:60px;z-index:99;';
+    const nav=document.getElementById('navbar');
+    if(nav)nav.insertAdjacentElement('afterend',b);else document.body.prepend(b);
+  }
+  const logo=localStorage.getItem('trikul_logo');
+  const parts=[];
+  if(logo)parts.push('<img src="'+logo+'" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)"/>');
+  if(p.name)parts.push('<strong style="color:var(--text)">'+p.name+'</strong>');
+  if(p.tagline)parts.push('<span>'+p.tagline+'</span>');
+  const links=[];
+  if(p.youtube)links.push('<a href="'+p.youtube+'" target="_blank">📺</a>');
+  if(p.instagram)links.push('<a href="'+p.instagram+'" target="_blank">📸</a>');
+  if(p.whatsapp)links.push('<a href="'+p.whatsapp+'" target="_blank">💬</a>');
+  if(p.facebook)links.push('<a href="'+p.facebook+'" target="_blank">📘</a>');
+  if(p.phone)links.push('<a href="tel:'+p.phone+'">📞</a>');
+  if(links.length)parts.push('<span style="margin-left:auto;display:flex;gap:10px;">'+links.join('')+'</span>');
+  b.innerHTML=parts.join(' <span style="opacity:0.25">|</span> ')+'<style>#userProfileBanner a{color:var(--gold);text-decoration:none;font-size:1.1rem;}</style>';
+  b.style.display=p.name?'flex':'none';
+}
+
+// Save button - addEventListener (onclick se zyada reliable)
+document.addEventListener('DOMContentLoaded', function(){
+  const btn = document.getElementById('saveProfileBtn');
+  if(btn) btn.addEventListener('click', saveProfile);
+});
+var _sp2=JSON.parse(localStorage.getItem('trikul_profile')||'{}');
+applyProfileToSite(_sp2);
+showUserProfileBanner(_sp2);
+
+loadAll();
+
+// auto-apply
+(function(){
+  try{
+    var sp=JSON.parse(localStorage.getItem("trikul_profile")||"{}");
+    if(sp&&sp.name){applyProfileToSite(sp);showUserProfileBanner(sp);}
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
