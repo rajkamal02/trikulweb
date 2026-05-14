@@ -1,4 +1,12 @@
-﻿require('dotenv').config({ override: true });
+﻿// Auto-ping - server ko jaagne rakho
+const RENDER_URL = process.env.RENDER_URL || '';
+if (RENDER_URL) {
+  setInterval(() => {
+    fetch(RENDER_URL + '/api/health')
+      .then(() => console.log('Ping sent - server awake'))
+      .catch(() => {});
+  }, 840000); // har 14 minute mein ping
+}require('dotenv').config({ override: true });
 const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
@@ -366,6 +374,7 @@ app.get('*', (req, res) => {
 });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Trikul Academy running at http://localhost:${PORT}`));
+
 
 
 
